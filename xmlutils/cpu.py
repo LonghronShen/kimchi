@@ -56,7 +56,7 @@ def get_cpu_xml(cpus, memory, cpu_topo=None):
     #   </cpu>
     if cpu_topo is None:
         cpu_topo = {}
-    xml = E.cpu(ET.fromstring(get_numa_xml(cpus, memory)))
+    xml = E("cpu", ET.fromstring(get_numa_xml(cpus, memory)), mode="host-passthrough")
     if cpu_topo:
         xml.insert(0, ET.fromstring(get_topology_xml(cpu_topo)))
     return ET.tostring(xml)
